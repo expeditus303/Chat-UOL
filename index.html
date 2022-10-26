@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    
+    <link rel="icon" href="./files/logoTab.svg"> 
+    <!-- tentar usar com o link do <ion-icon name="chatbubble-outline"></ion-icon> -->
+
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="login hide">
+            <img src="./files/logologin.png" alt="logo">
+            <input type="text" name="" id="" placeholder="Digite seu nome" class="inputLogin">
+            <input type="button" value="Entrar" class="buttonLogin">
+        </div>
+        <header>
+            <a href="#"><img src="./files/logo.png" alt="logo"></a>
+            <ion-icon name="people"></ion-icon>
+        </header>
+
+        <div class="chat">
+            <div class="messageInOutContainer container">
+                <span class="timeMessage">(09:21:45)</span>
+                <span class="nicknameFrom">João</span>
+                <span class="status">entra na sala...</span>
+            </div>
+
+            <div class="messageContainer container">
+                <span class="timeMessage">(09:22:28)</span>
+                <span class="nicknameFrom">João</span>
+                <span class="status">para</span>
+                <span class="nicknameTo">Todos:</span>
+                <span class="message">Bom dia</span>
+            </div>
+
+            <div class="messageContainer container">
+                <span class="timeMessage">(09:22:38)</span>
+                <span class="nicknameFrom">Maria</span>
+                <span class="status">para</span>
+                <span class="nicknameTo">João:</span>
+                <span class="message">Oi João :)</span>
+            </div>
+
+            <div class="messagePrivateContainer container">
+                <span class="timeMessage">(09:22:48)</span>
+                <span class="nicknameFrom">João</span>
+                <span class="status">reservadamente para</span>
+                <span class="nicknameTo">Maria:</span>
+                <span class="message">Oi gatinha quer tc?</span>
+            </div>
+
+            <div class="messageInOutContainer container">
+                <span class="timeMessage">(09:22:58)</span>
+                <span class="nicknameFrom">Maria</span>
+                <span class="status">sai da sala...</span>
+            </div>
+        </div>
+
+        <div class="sendMessage">
+            <input type="text" name="" id="" value="Escreva aqui..." onfocus="this.value=''" placeholder="Escreva aqui...">
+            <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
