@@ -26,49 +26,17 @@
         </header>
 
         <div class="chat">
-            <div class="messageInOutContainer container">
-                <span class="timeMessage">(09:21:45)</span>
-                <span class="nicknameFrom">João</span>
-                <span class="status">entra na sala...</span>
-            </div>
-
-            <div class="messageContainer container">
-                <span class="timeMessage">(09:22:28)</span>
-                <span class="nicknameFrom">João</span>
-                <span class="status">para</span>
-                <span class="nicknameTo">Todos:</span>
-                <span class="message">Bom dia</span>
-            </div>
-
-            <div class="messageContainer container">
-                <span class="timeMessage">(09:22:38)</span>
-                <span class="nicknameFrom">Maria</span>
-                <span class="status">para</span>
-                <span class="nicknameTo">João:</span>
-                <span class="message">Oi João :)</span>
-            </div>
-
-            <div class="messagePrivateContainer container">
-                <span class="timeMessage">(09:22:48)</span>
-                <span class="nicknameFrom">João</span>
-                <span class="status">reservadamente para</span>
-                <span class="nicknameTo">Maria:</span>
-                <span class="message">Oi gatinha quer tc?</span>
-            </div>
-
-            <div class="messageInOutContainer container">
-                <span class="timeMessage">(09:22:58)</span>
-                <span class="nicknameFrom">Maria</span>
-                <span class="status">sai da sala...</span>
-            </div>
+            
         </div>
 
-        <div class="sendMessage">
-            <input type="text" name="" id="" value="Escreva aqui..." onfocus="this.value=''" placeholder="Escreva aqui...">
-            <ion-icon name="paper-plane-outline"></ion-icon>
+        <div class="sendMessageContainer">
+            <input type="text" placeholder="Escreva aqui..." class="txtSendMessage">
+            <ion-icon name="paper-plane-outline" class="buttonSendMessage" onclick="sendMessage()"></ion-icon>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

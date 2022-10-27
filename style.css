@@ -57,15 +57,21 @@
 }
 
 header {
-    width: 100%;
+    width: 375px;
     display: flex;
     justify-content: space-between;
     padding: 16px 22px;
     font-size: 42px;
     margin-bottom: 26px;
+    position: fixed;
+    left: auto;
+    top: 0;
+    background-color: white;
 }
 
 .chat {
+    margin-top: 80px;
+    margin-bottom: 80px;
     width: 100%;
 }
 
@@ -76,7 +82,7 @@ header {
     margin-bottom: 4px;
 }
 
-.messageInOutContainer {
+.status {
     background: #DCDCDC;
 }
 
@@ -84,15 +90,15 @@ header {
     background: #FFDEDE;
 }
 
-.timeMessage {
+.time {
     color: #AAAAAA;
 }
 
-.nicknameFrom, .nicknameTo {
+.from, .to {
     font-weight: 700;
 }
 
-.sendMessage {
+.sendMessageContainer {
     width: 375px;
     display: flex;
     justify-content: space-between;
@@ -103,6 +109,7 @@ header {
     left: auto;
     bottom: 0;
     z-index: 1;
+    background-color: white;
 }
 
 input {
@@ -116,3 +123,7 @@ input {
 input:focus::placeholder {
     color: transparent;
   }
+
+.teste {
+    background-color: red;
+}
