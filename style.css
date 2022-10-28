@@ -124,6 +124,7 @@ input:focus::placeholder {
     color: transparent;
   }
 
-.teste {
-    background-color: red;
+.hide {
+    display: none;
 }
+

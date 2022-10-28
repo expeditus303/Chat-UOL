@@ -60,35 +60,26 @@ function offline() {
 
 // TO SEND A MESSAGE TO THE SERVER
 function sendMessage() {
-    
-    let txtSendMessage = document.querySelector('.txtSendMessage').value
-    console.log(txtSendMessage)
 
     let newMessage = { 
         from: nickname,
         to: 'Todos',
-        text: txtSendMessage,
+        text: txtSendMessage.value,
         type: "message"
     }
     
     console.log(newMessage)
 
-    let txtSendMessages = document.querySelector('.txtSendMessage')
-    txtSendMessages.value = ''
-    console.log(txtSendMessages + 'teste')
+    txtSendMessage.value = ''
     
     const promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', newMessage)
     promisse.then(sendMessageSuccess);
     promisse.catch(sendMessageError)
-
-    
-
 }
 
 function sendMessageSuccess(mensagem) {
-    console.log(mensagem)
-    console.log('mensagem enviada com sucesso')
     getData() //get new messages
+    console.log('message was sent')
 }
 
 function sendMessageError() {
@@ -96,7 +87,15 @@ function sendMessageError() {
 }
 // ---------------------------------------------------------------------------
 
+let txtSendMessage = document.querySelector('.txtSendMessage')
 
+    
+txtSendMessage.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.querySelector('.buttonSendMessage').click();
+    }
+});
 
 
 // ASK FOR DATA ON THE SERVER
@@ -116,6 +115,7 @@ function success(dataReceived) {
 function error(error) {
     console.log(error)
 }
+// ---------------------------------------------------------------------------
 
 
 // TO RENDER MESSAGES FROM SERVER ON HTML
@@ -125,12 +125,6 @@ function renderMessages() {
 
     for (let i = 0; i < messages.length; i++) {
 
-        
-        
-        const messageContainer = document.querySelectorAll('.messageContainer')
-
-        
-        
         if (messages[i].type == 'status') {
             messages[i].type = '';
             messages[i].to = '' ;
@@ -139,6 +133,9 @@ function renderMessages() {
         } else if (messages[i].type == 'message') {
             messages[i].type = 'para'
             messages[i].to +=':'
+        
+        } else if (messages[i].type == 'private_message') {
+            messages[i].type = 'reservadamente para'
         }
 
         chat.innerHTML += `
@@ -150,14 +147,18 @@ function renderMessages() {
                 <span class="text">${messages[i].text}</span>
             </div>
         `
-        if (messages[i].type == 'status') {
-            for (let j = 0; j < messageContainer.length; j++) {
-                messageContainer[j].classList.add('status');
-            }
+
+        const messageContainer = document.querySelectorAll('.messageContainer')
+        if (messages[i].type == '') {
+            messageContainer[i].classList.add('status')
+        } else if (messages[i].type == 'reservadamente para') {
+            if (nickname == messages[i].to) {
+                messageContainer[i].classList.add('messagePrivateContainer')
+            } else {
+                messageContainer[i].classList.add('hide')
+            }   
         }
         
-        
-
         automaticScroll();
     }
 }
