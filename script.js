@@ -1,45 +1,103 @@
+// GLOBAL
 let messages = [];
-const askName = prompt('Type your nickname:')
-const serverName = {name: askName}
-
 const chat = document.querySelector('.chat');
-const txtSendMessage = document.querySelector('.txtSendMessage')
+let nickname;
+let serverName;
 
-
-pushServerName()
+// FUNCTIONS 
+postServerName()
 getData()
 setInterval(getData, 3000)
+setInterval(isOnline, 5000)
 
 // TO SEND NICKNAME TO THE SERVER
-function pushServerName() {
+function postServerName() {
+    nickname = prompt('Type your nickname:')
+    serverName = {name: nickname}
+
     const promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', serverName)
-    promisse.then(okay);
-    promisse.catch(notokay)
+    promisse.then(pushServerNameSuccess);
+    promisse.catch(pushServerNameError)
 }
+
+function pushServerNameSuccess() {
+    console.log('nickname enviado com sucesso')
+    getData() //get new messages
+}
+
+function pushServerNameError(error) {
+    
+    if (error.response.status === 400 && nickname.length > 0) {
+        alert('This nickname is already in use')
+        postServerName()
+    } else if (error.response.status === 400 && nickname.length == 0) {
+        alert('You need a nickname to enter :)')
+        postServerName()
+    }
+    
+}
+// ---------------------------------------------------------------------------
+
+
+
+// TO CHECK IF USER IS ONLINE
+function isOnline() {
+    const promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', serverName)
+    promisse.then(online)
+    promisse.catch(offline)
+}
+
+function online() {
+    console.log('you are online')
+}
+
+function offline() {
+    console.log('you are offline')
+}
+// ---------------------------------------------------------------------------
+
+
 
 // TO SEND A MESSAGE TO THE SERVER
 function sendMessage() {
-    let sendMessageTemplate = { 
-        from: askName,
+    
+    let txtSendMessage = document.querySelector('.txtSendMessage').value
+    console.log(txtSendMessage)
+
+    let newMessage = { 
+        from: nickname,
         to: 'Todos',
-        text: txtSendMessage.value,
+        text: txtSendMessage,
         type: "message"
     }
+    
+    console.log(newMessage)
 
-    console.log(sendMessageTemplate)
-    const promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendMessageTemplate)
-    promisse.then(okay);
-    promisse.catch(notokay)
+    let txtSendMessages = document.querySelector('.txtSendMessage')
+    txtSendMessages.value = ''
+    console.log(txtSendMessages + 'teste')
+    
+    const promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', newMessage)
+    promisse.then(sendMessageSuccess);
+    promisse.catch(sendMessageError)
+
+    
+
 }
 
-// IF EVERTHING IS ALLRIGHT ON SENDING NICKNAME TO THE SERVER
-function okay() {
-    alert('tudo ok')
+function sendMessageSuccess(mensagem) {
+    console.log(mensagem)
+    console.log('mensagem enviada com sucesso')
+    getData() //get new messages
 }
-// IF HAVE SOME PROBLEM ON SENDING NICKNAME TO THE SERVER
-function notokay() {
-    alert('nada ok')
+
+function sendMessageError() {
+    window.location.reload()
 }
+// ---------------------------------------------------------------------------
+
+
+
 
 // ASK FOR DATA ON THE SERVER
 function getData() {
@@ -55,8 +113,8 @@ function success(dataReceived) {
 }
 
 // DO IT WHEN HAVE SOME PROBLEM RECEIVING DATA FROM SERVER
-function error() {
-    alert('erro')
+function error(error) {
+    console.log(error)
 }
 
 
