@@ -5,10 +5,10 @@ let nickname;
 let serverName;
 
 // FUNCTIONS 
-postServerName()
+//postServerName()
 getData()
-setInterval(getData, 3000)
-setInterval(isOnline, 5000)
+//setInterval(getData, 3000)
+//setInterval(isOnline, 5000)
 
 // TO SEND NICKNAME TO THE SERVER
 function postServerName() {
@@ -152,7 +152,7 @@ function renderMessages() {
         if (messages[i].type == '') {
             messageContainer[i].classList.add('status')
         } else if (messages[i].type == 'reservadamente para') {
-            if (nickname == messages[i].to) {
+            if (nickname == messages[i].to) { // adicionar && com o parametro de quem recebe a mensagem conseguir ver também
                 messageContainer[i].classList.add('messagePrivateContainer')
             } else {
                 messageContainer[i].classList.add('hide')
