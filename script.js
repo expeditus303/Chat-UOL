@@ -4,7 +4,7 @@ let usersOnline = [];
 const chat = document.querySelector('.chat');
 const users = document.querySelector('.menuRigth')
 const menu = document.querySelector('.menu')
-let txtSendMessage = document.querySelector('.txtSendMessage').value
+let txtSendMessage = document.querySelector('.txtSendMessage')
 let nickname;
 let serverName;
 
@@ -14,7 +14,7 @@ getData()
 getUsers()
 setInterval(getData, 3000)
 setInterval(isOnline, 5000)
-SetInterval(getUsers, 10000)
+setInterval(getUsers, 10000)
 
 // TO SEND NICKNAME TO THE SERVER
 function postServerName() {
