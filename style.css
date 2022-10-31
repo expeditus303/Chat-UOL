@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: blueviolet;
     
 }
 
@@ -34,10 +33,6 @@
 .login img {
     width: 130px;
     margin: 72px 123px 95px;
-}
-
-.hide {
-    display: none;
 }
 
 .inputLogin {
@@ -74,7 +69,7 @@ header {
 
 .chat {
     margin-top: 80px;
-    margin-bottom: 80px;
+    /* margin-bottom: 80px; */
     /* width: 100%; */
 }
 
@@ -112,7 +107,6 @@ header {
     left: auto;
     bottom: 0;
     z-index: 1;
-    background-color: red;
     box-sizing: border-box;
 }
 
@@ -128,18 +122,13 @@ input:focus::placeholder {
     color: transparent;
   }
 
-.hide {
-    display: none;
-}
-
 .menu {
     position: fixed;
     height: 100%;
     width: 375px;
     z-index: 5;
     display: flex;
-    justify-content: space-between;
-    
+    justify-content: space-between;    
 }
 
 .menuLeft {
@@ -178,7 +167,7 @@ input:focus::placeholder {
 .selectTo {
     width: 100%;
     font-size: 16px;
-    background-color: red;
+    
 }
 
 .iconMenu {
@@ -190,4 +179,8 @@ input:focus::placeholder {
     font-size: 20px;
     color: #28BB25;
     
+}
+
+.hidden {
+    display: none;
 }

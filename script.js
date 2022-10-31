@@ -1,14 +1,20 @@
 // GLOBAL
 let messages = [];
+let usersOnline = [];
 const chat = document.querySelector('.chat');
+const users = document.querySelector('.menuRigth')
+const menu = document.querySelector('.menu')
+let txtSendMessage = document.querySelector('.txtSendMessage').value
 let nickname;
 let serverName;
 
 // FUNCTIONS 
-//postServerName()
+postServerName()
 getData()
-//setInterval(getData, 3000)
-//setInterval(isOnline, 5000)
+getUsers()
+setInterval(getData, 3000)
+setInterval(isOnline, 5000)
+SetInterval(getUsers, 10000)
 
 // TO SEND NICKNAME TO THE SERVER
 function postServerName() {
@@ -60,6 +66,7 @@ function offline() {
 
 // TO SEND A MESSAGE TO THE SERVER
 function sendMessage() {
+    let txtSendMessage = document.querySelector('.txtSendMessage')
 
     let newMessage = { 
         from: nickname,
@@ -87,7 +94,7 @@ function sendMessageError() {
 }
 // ---------------------------------------------------------------------------
 
-let txtSendMessage = document.querySelector('.txtSendMessage')
+
 
     
 txtSendMessage.addEventListener("keypress", function(event) {
@@ -155,7 +162,7 @@ function renderMessages() {
             if (nickname == messages[i].to) { // adicionar && com o parametro de quem recebe a mensagem conseguir ver também
                 messageContainer[i].classList.add('messagePrivateContainer')
             } else {
-                messageContainer[i].classList.add('hide')
+                messageContainer[i].classList.add('hidden')
             }   
         }
         
@@ -167,4 +174,79 @@ function renderMessages() {
 function automaticScroll() {
     const lastMessage = chat.lastElementChild
     lastMessage.scrollIntoView();
+}
+
+// BONUS
+
+// GET USERS WHO ARE ONLINE
+function getUsers() {
+    const promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    promisse.then(usersOnlineSuccess);
+    promisse.catch(errorUsersOnline)
+}
+
+function usersOnlineSuccess (usersReceived) {
+    usersOnline = usersReceived.data
+    console.log('usuarios atualizados')
+    renderUsers()
+}
+
+function errorUsersOnline() {
+    console.log('Error getting users online')
+}
+
+function renderUsers() {
+    users.innerHTML = ''
+
+    users.innerHTML = `
+        <div class="menuTxt">Escolha um contato para enviar mensagem:</div>
+            <div class="userTo">
+                <ion-icon name="people" class="iconMenu"></ion-icon>
+                <p class="selectTo">Todos</p>
+                <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+        </div>`
+    
+    for (let i = 0; i < usersOnline.length; i++) {
+        
+        users.innerHTML += `
+        <div class="userTo" onclick="selectedUser(this)">
+            <ion-icon name="person-circle" class="iconMenu"></ion-icon>
+            <p class="selectTo">${usersOnline[i].name}</p>
+            <ion-icon name="checkmark-sharp" class="check hidden"></ion-icon>
+        </div>
+        `
+    }
+
+    users.innerHTML += `
+        <div class="menuTxt">Escolha a visibilidade:</div>
+        
+        <div class="userTo">
+            <ion-icon name="lock-open" class="iconMenu"></ion-icon>
+            <p class="selectTo">Público</p>
+            <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+        </div>
+                
+        <div class="userTo">
+            <ion-icon name="lock-closed" class="iconMenu"></ion-icon>
+            <p class="selectTo">Reservadamente</p>
+            <ion-icon name="checkmark-sharp" class="check hidden"></ion-icon>
+        </div>
+    `
+}
+
+function openMenu() {
+    menu.classList.remove('hidden')
+}
+
+function closeMenu() {
+    const menuLeft = document.querySelector('.menuLeft')
+    menu.classList.add('hidden')
+}
+
+function selectedUser(thisUser) {
+    const deselectUser = document.querySelectorAll('.check')
+    for (let i = 0; i < deselectUser.length; i++) {
+        deselectUser[i].classList.add('hidden')
+    }
+    thisUser.lastElementChild.classList.remove('hidden')
 }

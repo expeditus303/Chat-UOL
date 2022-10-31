@@ -15,16 +15,16 @@
 </head>
 <body>
     <div class="main">
-        <div class="login hide">
+        <div class="login hidden">
             <img src="./files/logologin.png" alt="logo">
             <input type="text" name="" id="" placeholder="Digite seu nome" class="inputLogin">
             <input type="button" value="Entrar" class="buttonLogin">
         </div>
 
-        <div class="menu">
-            <div class="menuLeft"></div>
+        <div class="menu hidden">
+            <div class="menuLeft" onclick="closeMenu()"></div>
             <div class="menuRigth">
-                <div class="menuTxt">Escolha um contato
+                <!-- <div class="menuTxt">Escolha um contato
                     para enviar mensagem:</div>
                 <div class="userTo">
                     <ion-icon name="people" class="iconMenu"></ion-icon>
@@ -34,12 +34,12 @@
                 <div class="userTo">
                     <ion-icon name="person-circle" class="iconMenu"></ion-icon>
                     <p class="selectTo">João</p>
-                    <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+                    <ion-icon name="checkmark-sharp" class="check hide"></ion-icon>
                 </div>
                 <div class="userTo">
                     <ion-icon name="person-circle" class="iconMenu"></ion-icon>
                     <p class="selectTo">Maria</p>
-                    <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+                    <ion-icon name="checkmark-sharp" class="check hide"></ion-icon>
                 </div>
                 <div class="menuTxt">Escolha a visibilidade:</div>
                 <div class="userTo">
@@ -50,14 +50,14 @@
                 <div class="userTo">
                     <ion-icon name="lock-closed" class="iconMenu"></ion-icon>
                     <p class="selectTo">Reservadamente</p>
-                    <ion-icon name="checkmark-sharp" class="check"></ion-icon>
-                </div>
+                    <ion-icon name="checkmark-sharp" class="check hide"></ion-icon>
+                </div> -->
             </div>
         </div>
 
         <header>
             <a href="#"><img src="./files/logo.png" alt="logo"></a>
-            <ion-icon name="people"></ion-icon>
+            <ion-icon name="people" onclick="openMenu()"></ion-icon>
         </header>
 
         <div class="menuContainer">
